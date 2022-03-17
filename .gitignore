@@ -12,6 +12,7 @@ doc
 # Editor specific files and folders
 *~
 .project
+.idea
 
 # Project specific files and folders
 *.mapfg
