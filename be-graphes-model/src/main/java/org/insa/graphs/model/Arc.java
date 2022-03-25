@@ -67,4 +67,8 @@ public abstract class Arc {
      * @return Points representing segments of this arc.
      */
     public abstract List<Point> getPoints();
+    
+    
+
+    
 }

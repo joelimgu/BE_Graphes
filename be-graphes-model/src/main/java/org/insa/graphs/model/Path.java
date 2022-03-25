@@ -83,12 +83,34 @@ public class Path {
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
      *
-     * @deprecated Need to be implemented.
+
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+        
+        // if only one node, path with this node
+        if (nodes.size()==1) return new Path(graph,nodes.get(0)); 
+        
+        // if list of nodes empty, empty path 
+        if (nodes.size()==0) return new Path(graph); 
+        
+        for (int i = 0; i < nodes.size() -1; i++) { // last node not in the loop 
+        	Node node = nodes.get(i); 
+        	// a node is not connected to anyone 
+        	if (!node.hasSuccessors()) throw new IllegalArgumentException() ; 
+    		Arc better = null; 
+        		for (Arc arc : node.getSuccessors()) {
+        			if (arc.getDestination()==nodes.get(i+1)) {
+        				if (better == null || better.getLength() > arc.getLength()) {
+        					better = arc ; 
+        				}
+        			}
+        		}
+        	// invalid list, two consecutive nodes are not connected 
+        	if (better == null) throw new IllegalArgumentException() ; 
+        	arcs.add(better); 
+        }
         return new Path(graph, arcs);
     }
 
@@ -230,7 +252,6 @@ public class Path {
      *
      * @return true if the path is valid, false otherwise.
      *
-     * @deprecated Need to be implemented.
      */
     public boolean isValid() {
         if (this.origin == null) { // it's empty
@@ -257,7 +278,7 @@ public class Path {
      * @return Total length of the path (in meters).
      *
      *
-     * @deprecated Need to be implemented.
+
      */
     public float getLength() {
     	List <Arc> arcs = this.getArcs() ;
@@ -278,7 +299,6 @@ public class Path {
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
      *
-     * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
         double msSpeed = speed * 1000 / 3600;
