@@ -2,6 +2,7 @@ package org.insa.graphs.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -210,11 +211,16 @@ public class Path {
      * 
      * @return Total length of the path (in meters).
      * 
-     * @deprecated Need to be implemented.
      */
     public float getLength() {
-        // TODO:
-        return 0;
+    	List <Arc> arcs = this.getArcs() ; 
+    	Iterator<Arc> itArc = arcs.iterator() ; 
+    	float len = 0 ; 
+    	for (Arc arc : this.getArcs()) { 
+    		len += arc.getLength(); 
+ 
+    	}
+        return len;
     }
 
     /**
