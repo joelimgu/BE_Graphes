@@ -200,7 +200,6 @@ public class Path {
      *
      * @return true if the path is valid, false otherwise.
      *
-     * @deprecated Need to be implemented.
      */
     public boolean isValid() {
         if (this.origin == null) { // it's empty
@@ -227,7 +226,7 @@ public class Path {
      * @return Total length of the path (in meters).
      * 
      *
-     * @deprecated Need to be implemented.
+
      */
     public float getLength() {
     	List <Arc> arcs = this.getArcs() ; 
@@ -248,7 +247,6 @@ public class Path {
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
      *
-     * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
         double msSpeed = speed * 1000 / 3600;
