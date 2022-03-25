@@ -2,6 +2,7 @@ package org.insa.graphs.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -202,8 +203,22 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public boolean isValid() {
-        // TODO:
-        return false;
+        if (this.origin == null) { // it's empty
+            return true;
+        }
+        if (this.arcs == null) { // has a single node
+            return true;
+        }
+
+        Node preOrigin = this.origin;
+        for (Arc arc: this.arcs) {
+            if (arc.getOrigin() == preOrigin) {
+                preOrigin = arc.getDestination();
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
