@@ -12,12 +12,12 @@
 	<name>be-graphes-all</name>
 
 	<properties>
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>1.11</jdk.version>
 		<maven.compiler.source>${jdk.version}</maven.compiler.source>
 		<maven.compiler.target>${jdk.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
    <build>
         <plugins>
             <plugin>
@@ -39,7 +39,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<modules>
 		<module>be-graphes-model</module>
 		<module>be-graphes-algos</module>
