@@ -22,9 +22,9 @@ interface Arc
 class RoadInformation
 
 Graph o-- "*" Node : contains 
-Node "*" -- "*" Node : successor
+Node "*" -- "*" Arc : contains
 Node "0..1"-- "*" Path : can be part of
 Path "0..1"-- "*" Arc : contains 
-Node "2"--"*"Arc : is linked by
+Node "2"--"*"Arc : contains
 Arc "*"-"1" RoadInformation
 @enduml
