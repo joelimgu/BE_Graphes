@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -14,6 +15,7 @@ import org.insa.graphs.gui.drawing.components.BasicDrawing;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Path;
 import org.insa.graphs.model.io.BinaryGraphReader;
+import org.insa.graphs.model.io.BinaryPathReader;
 import org.insa.graphs.model.io.GraphReader;
 import org.insa.graphs.model.io.PathReader;
 
@@ -21,9 +23,9 @@ public class Launch {
 
     /**
      * Create a new Drawing inside a JFrame an return it.
-     * 
+     *
      * @return The created drawing.
-     * 
+     *
      * @throws Exception if something wrong happens when creating the graph.
      */
     public static Drawing createDrawing() throws Exception {
@@ -53,21 +55,26 @@ public class Launch {
         final GraphReader reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
-        // TODO: Read the graph.
-        final Graph graph = null;
+
+        Graph graph = null;
+        try {
+            graph = reader.read();
+        } catch (IOException err) {
+            System.out.println("Unable to read the map file: " + err);
+            System.exit(-1);
+        }
 
         // Create the drawing:
         final Drawing drawing = createDrawing();
 
-        // TODO: Draw the graph on the drawing.
+        drawing.drawGraph(graph);
 
-        // TODO: Create a PathReader.
-        final PathReader pathReader = null;
+        final PathReader pathReader = new BinaryPathReader(
+                new DataInputStream(new BufferedInputStream(new FileInputStream(pathName))));
 
-        // TODO: Read the path.
-        final Path path = null;
+        final Path path = pathReader.readPath(graph);
 
-        // TODO: Draw the path.
+        drawing.drawPath(path);
     }
 
 }
