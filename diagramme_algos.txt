@@ -1,0 +1,15 @@
+@startuml
+abstract class AbstractAlgorithm
+abstract class AbstractInputData 
+abstract class AbstractSolution 
+abstract class AlgorithmFactory
+abstract class ShortestPathAlgorithm
+ShortestPathAlgorithm : run()
+ShortestPathAlgorithm : getInput()
+AbstractAlgorithm <|--  ShortestPathAlgorithm
+class BellmanFordAlgorithm
+ShortestPathAlgorithm <|-- BellmanFordAlgorithm
+class DijkstraAlgorithm
+ShortestPathAlgorithm <|-- DijkstraAlgorithm
+AbstractAlgorithm *-- AbstractInputData
+@enduml
