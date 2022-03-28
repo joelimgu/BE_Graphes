@@ -1,0 +1,30 @@
+http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000
+
+
+@startuml
+class Graph
+Graph : mapIp
+Graph : mapName 
+Graph : nodes 
+Graph : graphStatistics
+
+class Node 
+Node : id 
+Node : point 
+Node : successors 
+
+class Path 
+Path : arcs 
+Path : graph 
+
+interface Arc 
+
+class RoadInformation
+
+Graph o-- "*" Node : contains 
+Node "*" -- "*" Node : successor
+Node "0..1"-- "*" Path : can be part of
+Path "0..1"-- "*" Arc : contains 
+Node "2"--"*"Arc : is linked by
+Arc "*"-"1" RoadInformation
+@enduml
