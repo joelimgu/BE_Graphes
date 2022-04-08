@@ -1,6 +1,7 @@
 package org.insa.graphs.algorithm.shortestpath;
 
 import org.insa.graphs.algorithm.AbstractSolution;
+import org.insa.graphs.algorithm.AbstractSolution.Status;
 import org.insa.graphs.algorithm.utils.BinaryHeap;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
@@ -53,7 +54,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         ShortestPathSolution solution = null ;
 
         if (labels.get(data.getDestination().getId()).getFather()==null){
-            solution = new ShortestPathSolution(data, AbstractSolution.Status.INFEASIBLE);
+            solution = new ShortestPathSolution(data, Status.INFEASIBLE);
         }else{
             // cf bellman pour reconstruire la solution
             ArrayList<Arc> arcs = new ArrayList<>();
