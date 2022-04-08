@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * Note that all comparisons are based on the compareTo method, hence E must
  * implement Comparable
- * 
+ *
  * @author Mark Allen Weiss
  * @author DLB
  */
@@ -29,7 +29,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     /**
      * Construct a copy of the given heap.
-     * 
+     *
      * @param heap Binary heap to copy.
      */
     public BinaryHeap(BinaryHeap<E> heap) {
@@ -39,7 +39,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     /**
      * Set an element at the given index.
-     * 
+     *
      * @param index Index at which the element should be set.
      * @param value Element to set.
      */
@@ -68,7 +68,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     /**
      * Internal method to percolate up in the heap.
-     * 
+     *
      * @param index Index at which the percolate begins.
      */
     private void percolateUp(int index) {
@@ -86,7 +86,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     /**
      * Internal method to percolate down in the heap.
-     * 
+     *
      * @param index Index at which the percolate begins.
      */
     private void percolateDown(int index) {
@@ -137,21 +137,21 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     @Override
     public void remove(E x) throws ElementNotFoundException {
-        // find x 
-    	// TODO : find a more efficient way than indexOf 
-    	int index = this.array.indexOf(x); 
-    	
-    	
+        // find x
+    	// TODO : find a more efficient way than indexOf
+    	int index = this.array.indexOf(x);
+
+
     	if (index == -1 || this.currentSize -1 < index) {
-    		throw new ElementNotFoundException(x); 
+    		throw new ElementNotFoundException(x);
     	}
-    	
-    	E lastItem = this.array.get(--this.currentSize); // -- pre decrement 
-    	this.arraySet(index,lastItem); 
+
+    	E lastItem = this.array.get(--this.currentSize); // -- pre decrement
+    	this.arraySet(index,lastItem);
     	this.percolateUp(index);
     	this.percolateDown(index);
-    	
-   
+
+
     }
 
     @Override
@@ -172,7 +172,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     /**
      * Creates a multi-lines string representing a sorted view of this binary heap.
-     * 
+     *
      * @return a string containing a sorted view this binary heap.
      */
     public String toStringSorted() {
@@ -181,10 +181,10 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     /**
      * Creates a multi-lines string representing a sorted view of this binary heap.
-     * 
+     *
      * @param maxElement Maximum number of elements to display. or {@code -1} to
      *                   display all the elements.
-     * 
+     *
      * @return a string containing a sorted view this binary heap.
      */
     public String toStringSorted(int maxElement) {
@@ -193,7 +193,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     /**
      * Creates a multi-lines string representing a tree view of this binary heap.
-     * 
+     *
      * @return a string containing a tree view of this binary heap.
      */
     public String toStringTree() {
@@ -202,9 +202,9 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     /**
      * Creates a multi-lines string representing a tree view of this binary heap.
-     * 
+     *
      * @param maxDepth Maximum depth of the tree to display.
-     * 
+     *
      * @return a string containing a tree view of this binary heap.
      */
     public String toStringTree(int maxDepth) {

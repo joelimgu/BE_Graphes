@@ -48,8 +48,8 @@ public class Launch {
     public static void main(String[] args) throws Exception {
 
         // Visit these directory to see the list of available files on Commetud.
-        final String mapName = "/home/jean-bap/3MIC/insa.mapgr";
-        final String pathName = "/home/jean-bap/3MIC/path_fr31insa_rangueil_r2.path";
+        final String mapName = LaunchPath.getMapName();
+        final String pathName = LaunchPath.getPathName();
 
         // Create a graph reader.
         final GraphReader reader = new BinaryGraphReader(
