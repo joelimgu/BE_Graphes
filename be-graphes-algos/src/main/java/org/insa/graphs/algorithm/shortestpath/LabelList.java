@@ -6,14 +6,14 @@ import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Node;
 
 public class LabelList {
-	
-	private ArrayList<Label> labels; 
-	
+
+	private ArrayList<Label> labels;
+
 	public LabelList(Graph graph) {
 		int size = graph.size();
-		this.labels = new ArrayList(size);
+		this.labels = new ArrayList();
 		for (int i = 0; i<size; i++) {
-			this.labels.set(i, new Label(graph.get(i))); //TODO: constructeur label
+			this.labels.add(new Label(graph.get(i)));
 		}
 	}
 
