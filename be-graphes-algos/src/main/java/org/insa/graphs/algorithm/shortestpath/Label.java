@@ -22,7 +22,21 @@ public class Label {
 	public double getCost() {
 		return cost; 
 	}
-	
-	
-	
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
+	public void setFather(Arc father) {
+		this.father = father;
+	}
+
+	public void setMark(boolean mark) {
+		this.mark = mark;
+	}
+
+	public boolean compareTo(Label label){
+		// TODO
+		return true;
+	}
 }

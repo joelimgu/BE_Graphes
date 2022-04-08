@@ -10,10 +10,15 @@ public class LabelList {
 	private ArrayList<Label> labels; 
 	
 	public LabelList(Graph graph) {
-		int size = graph.size(); 
-		this.labels = new ArrayList(size); 
+		int size = graph.size();
+		this.labels = new ArrayList(size);
 		for (int i = 0; i<size; i++) {
-			this.labels.set(i, null); //TODO: constructeur label
+			this.labels.set(i, new Label(graph.get(i))); //TODO: constructeur label
 		}
 	}
+
+	public Label get(int id){
+		return this.labels.get(id);
+	}
+
 }
