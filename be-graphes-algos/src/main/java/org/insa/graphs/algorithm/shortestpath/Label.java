@@ -15,8 +15,7 @@ public class Label implements Comparable<Label> {
 		this.node=node; 
 		this.mark=false; 
 		this.cost=Double.POSITIVE_INFINITY; 
-		this.father = null ; 
-		// TODO : quelle valeur donner au père? 
+		this.father = null ;
 	}
 	
 	public double getCost() {
@@ -44,8 +43,6 @@ public class Label implements Comparable<Label> {
 	}
 
 	public int compareTo(Label label){
-		// TODO
-
 		return (int)(this.getCost()-label.getCost());
 	}
 
