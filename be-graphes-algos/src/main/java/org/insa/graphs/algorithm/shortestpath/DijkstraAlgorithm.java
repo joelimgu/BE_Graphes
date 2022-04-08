@@ -13,9 +13,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         final ShortestPathData data = getInputData();
         ShortestPathSolution solution = null;
         Graph graph = data.getGraph();
-        // peut-être plus simple de faire la liste ici plutôt que dans une classe à part?
         LabelList labels = new LabelList(graph);
         // TODO:
+        // initialisation
+        // probablement pas la meilleure manière de faire, TODO changer labels.get?
+        labels.get(data.getOrigin().getId()).setCost(0);
         return solution;
     }
 
