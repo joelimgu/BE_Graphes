@@ -19,3 +19,4 @@ doc
 *.mapgr
 *.path
 *.tgz
+be-graphes-gui/src/main/java/org/insa/graphs/gui/simple/LaunchPath.java
