@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Node;
 
-public class Label {
+public class Label implements Comparable<Label> {
 	private Node node; 
 	private boolean mark;
 	private double cost;
@@ -23,6 +23,10 @@ public class Label {
 		return cost; 
 	}
 
+	public Node getNode() {
+		return node;
+	}
+
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
@@ -35,8 +39,17 @@ public class Label {
 		this.mark = mark;
 	}
 
-	public boolean compareTo(Label label){
+	public boolean isMarked(){
+		return this.mark ;
+	}
+
+	public int compareTo(Label label){
 		// TODO
-		return true;
+
+		return (int)(this.getCost()-label.getCost());
+	}
+
+	public Arc getFather() {
+		return this.father;
 	}
 }

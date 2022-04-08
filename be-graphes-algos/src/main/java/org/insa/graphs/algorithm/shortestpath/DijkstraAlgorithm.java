@@ -1,6 +1,15 @@
 package org.insa.graphs.algorithm.shortestpath;
 
+import org.insa.graphs.algorithm.AbstractSolution;
+import org.insa.graphs.algorithm.utils.BinaryHeap;
+import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
+import org.insa.graphs.model.Path;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import static java.lang.Math.min;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
@@ -11,13 +20,47 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     @Override
     protected ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
-        ShortestPathSolution solution = null;
         Graph graph = data.getGraph();
         LabelList labels = new LabelList(graph);
         // TODO:
         // initialisation
-        // probablement pas la meilleure manière de faire, TODO changer labels.get?
-        labels.get(data.getOrigin().getId()).setCost(0);
+        BinaryHeap<Label> tas = new BinaryHeap();
+        int originId = data.getOrigin().getId();
+        labels.get(originId).setCost(0);
+        tas.insert(labels.get(originId));
+
+        // itérations : cf poly p.46, diapo 3.2 plus courts chemins algo de dijkstra
+        while (!tas.isEmpty()){
+            Label x = tas.findMin();
+            x.setMark(true);
+            tas.remove(x);
+            for (Arc arcY : x.getNode().getSuccessors()) {
+                Label y = labels.get(arcY.getDestination().getId());
+                if (!y.isMarked()) {
+                    double oldCost = y.getCost();
+                    y.setCost(min(y.getCost(), x.getCost() + arcY.getLength()));
+                    if (oldCost != y.getCost()) {
+                        tas.insert(y);
+                        y.setFather(arcY);
+                    }
+                }
+            }
+        }
+
+        // cf bellman pour reconstruire la solution
+        ArrayList<Arc> arcs = new ArrayList<>();
+        Arc arc = labels.get(data.getDestination().getId()).getFather();
+        while (arc != null) {
+            arcs.add(arc);
+            arc = labels.get(arc.getOrigin().getId()).getFather();
+        }
+
+        // Reverse the path...
+        Collections.reverse(arcs);
+
+        // Create the final solution.
+        ShortestPathSolution solution = new ShortestPathSolution(data, AbstractSolution.Status.OPTIMAL, new Path(graph, arcs));
+
         return solution;
     }
 
