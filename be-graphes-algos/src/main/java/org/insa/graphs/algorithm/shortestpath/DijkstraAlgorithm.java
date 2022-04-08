@@ -35,6 +35,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             x.setMark(true);
             tas.remove(x);
             for (Arc arcY : x.getNode().getSuccessors()) {
+                if (!data.isAllowed(arcY)){
+                    continue; 
+                }
                 Label y = labels.get(arcY.getDestination().getId());
                 if (!y.isMarked()) {
                     double oldCost = y.getCost();
