@@ -23,10 +23,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         final ShortestPathData data = getInputData();
         Graph graph = data.getGraph();
         LabelList labels = new LabelList(graph);
-        // TODO:
         // initialisation
         BinaryHeap<Label> tas = new BinaryHeap();
         int originId = data.getOrigin().getId();
+        notifyOriginProcessed(data.getOrigin());
         labels.get(originId).setCost(0);
         tas.insert(labels.get(originId));
 
@@ -35,6 +35,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             Label x = tas.findMin();
             x.setMark(true);
             tas.remove(x);
+            if (x.getNode()==data.getDestination()){
+                notifyDestinationReached(data.getDestination());
+                break; 
+            }
             for (Arc arcY : x.getNode().getSuccessors()) {
                 if (!data.isAllowed(arcY)){
                     continue;
@@ -44,6 +48,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                     double oldCost = y.getCost();
                     y.setCost(min(y.getCost(), x.getCost() + arcY.getLength()));
                     if (oldCost != y.getCost()) {
+                        notifyNodeReached(y.getNode());
                         tas.insert(y);
                         y.setFather(arcY);
                     }
