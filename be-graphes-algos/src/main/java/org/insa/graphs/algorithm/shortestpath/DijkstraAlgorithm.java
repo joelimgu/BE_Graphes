@@ -36,7 +36,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             tas.remove(x);
             for (Arc arcY : x.getNode().getSuccessors()) {
                 if (!data.isAllowed(arcY)){
-                    continue; 
+                    continue;
                 }
                 Label y = labels.get(arcY.getDestination().getId());
                 if (!y.isMarked()) {
@@ -50,20 +50,27 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             }
         }
 
-        // cf bellman pour reconstruire la solution
-        ArrayList<Arc> arcs = new ArrayList<>();
-        Arc arc = labels.get(data.getDestination().getId()).getFather();
-        while (arc != null) {
-            arcs.add(arc);
-            arc = labels.get(arc.getOrigin().getId()).getFather();
+        ShortestPathSolution solution = null ;
+
+        if (labels.get(data.getDestination().getId()).getFather()==null){
+            solution = new ShortestPathSolution(data, AbstractSolution.Status.INFEASIBLE);
+        }else{
+            // cf bellman pour reconstruire la solution
+            ArrayList<Arc> arcs = new ArrayList<>();
+            Arc arc = labels.get(data.getDestination().getId()).getFather();
+            while (arc != null) {
+                arcs.add(arc);
+                arc = labels.get(arc.getOrigin().getId()).getFather();
+            }
+
+            // Reverse the path...
+            Collections.reverse(arcs);
+
+            // Create the final solution.
+            solution = new ShortestPathSolution(data, AbstractSolution.Status.OPTIMAL, new Path(graph, arcs));
+
         }
-
-        // Reverse the path...
-        Collections.reverse(arcs);
-
-        // Create the final solution.
-        ShortestPathSolution solution = new ShortestPathSolution(data, AbstractSolution.Status.OPTIMAL, new Path(graph, arcs));
-
+        
         return solution;
     }
 
