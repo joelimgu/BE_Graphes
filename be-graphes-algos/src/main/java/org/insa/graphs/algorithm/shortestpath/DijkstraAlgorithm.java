@@ -20,18 +20,21 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         super(data);
     }
 
-    public void generateLabels(){
-        
+    public void generateLabels(Graph graph){
+        int size = graph.size();
+        this.labels = new ArrayList<>();
+        for (int i = 0; i<size; i++) {
+            this.labels.add(new Label(graph.get(i)));
+        }
+
     }
 
     @Override
     public ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
         Graph graph = data.getGraph();
-        // définir une méthode qui intialise labels pour que modulable avec a star
-        // LabelList labels = new LabelList<Label>(graph);
-        // initialisation
-        BinaryHeap<Label> tas = new BinaryHeap();
+        generateLabels(graph);
+        BinaryHeap<Label> tas = new BinaryHeap<>();
         int originId = data.getOrigin().getId();
         notifyOriginProcessed(data.getOrigin());
         labels.get(originId).setCost(0);
@@ -63,7 +66,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             }
         }
 
-        ShortestPathSolution solution = null ;
+        ShortestPathSolution solution;
 
         if (labels.get(data.getDestination().getId()).getFather()==null){
             solution = new ShortestPathSolution(data, Status.INFEASIBLE);
