@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Node;
 
-public class LabelList<T> {
+public class LabelList{
 
 	private ArrayList<Label> labels;
 
