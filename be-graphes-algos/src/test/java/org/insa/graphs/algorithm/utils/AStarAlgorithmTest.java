@@ -27,7 +27,7 @@ public class AStarAlgorithmTest {
     // charger carte
     public void ChargerCarte() throws Exception{
         // load la map
-        String mapName = "C:\\Users\\dunae\\Documents\\INSA\\3A\\BE_Graphes\\Bretagne.mapgrs";
+        String mapName = "/home/joel/Documents/Code/INSA/BE_Graphes/bretagne.mapgr";
         // code de Launch
         final GraphReader reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
@@ -64,7 +64,7 @@ public class AStarAlgorithmTest {
         ShortestPathData dataS = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
         AStarAlgorithm dijkstraS = new AStarAlgorithm(dataS);
         Path shortest = dijkstraS.doRun().getPath();
-        assertEquals(shortest.getLength(), 0.0, 0.1);
+        assertNull(shortest);
     }
 
     @Test
