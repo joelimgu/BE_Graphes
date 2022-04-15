@@ -19,7 +19,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     }
 
     @Override
-    protected ShortestPathSolution doRun() {
+    public ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
         Graph graph = data.getGraph();
         LabelList labels = new LabelList(graph);
@@ -76,7 +76,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             solution = new ShortestPathSolution(data, AbstractSolution.Status.OPTIMAL, new Path(graph, arcs));
 
         }
-        
+
         return solution;
     }
 
