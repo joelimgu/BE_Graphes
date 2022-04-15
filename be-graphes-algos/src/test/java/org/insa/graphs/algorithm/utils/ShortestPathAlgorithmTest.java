@@ -79,9 +79,13 @@ public abstract class ShortestPathAlgorithmTest {
     }
 
     @Test
-    public void TestCheminNull(){
-        assertEquals();
+    public void TestCheminNull(Path path){
+        assertEquals(Double.compare(path.getLength(),0),0);
     }
 
+    @Test
+    public void DistanceCoherente(Path path,double distance){
+        assertTrue(Double.compare(path.getLength(),distance)>=0);
+    }
 
 }
