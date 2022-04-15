@@ -2,7 +2,7 @@ package org.insa.graphs.gui.simple;
 
 public class LaunchPath {
     public static String getMapName() {
-        return "/home/jean-bap/3MIC/insa.mapgr";
+        return "C:\\Users\\dunae\\Documents\\INSA\\3A\\BE_Graphes\\Bretagne.mapgr";
     }
     public static String getPathName() {
         return "/home/jean-bap/3MIC/insa.mapgr";

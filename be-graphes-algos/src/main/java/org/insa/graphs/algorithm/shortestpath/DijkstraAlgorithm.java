@@ -37,7 +37,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             tas.remove(x);
             if (x.getNode()==data.getDestination()){
                 notifyDestinationReached(data.getDestination());
-                break; 
+                break;
             }
             for (Arc arcY : x.getNode().getSuccessors()) {
                 if (!data.isAllowed(arcY)){
