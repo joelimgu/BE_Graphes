@@ -22,7 +22,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     public ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
         Graph graph = data.getGraph();
-        LabelList labels = new LabelList(graph);
+        // définir une méthode qui intialise labels pour que modulable avec a star 
+        LabelList labels = new LabelList<Label>(graph);
         // initialisation
         BinaryHeap<Label> tas = new BinaryHeap();
         int originId = data.getOrigin().getId();

@@ -22,6 +22,10 @@ public class Label implements Comparable<Label> {
 		return cost; 
 	}
 
+	public double getTotalCost(){
+		return cost;
+	}
+
 	public Node getNode() {
 		return node;
 	}
@@ -43,7 +47,7 @@ public class Label implements Comparable<Label> {
 	}
 
 	public int compareTo(Label label){
-		return (int)(this.getCost()-label.getCost());
+		return (int)(this.getTotalCost()-label.getTotalCost());
 	}
 
 	public Arc getFather() {
