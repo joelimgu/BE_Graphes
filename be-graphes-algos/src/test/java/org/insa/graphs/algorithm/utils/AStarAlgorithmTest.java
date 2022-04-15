@@ -3,6 +3,7 @@ package org.insa.graphs.algorithm.utils;
 import org.insa.graphs.algorithm.ArcInspectorFactory;
 import org.insa.graphs.algorithm.shortestpath.BellmanFordAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.AStarAlgorithm;
+import org.insa.graphs.algorithm.shortestpath.DijkstraAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.ShortestPathData;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Node;
@@ -99,8 +100,9 @@ public class AStarAlgorithmTest {
         AStarAlgorithm dijkstraD = new AStarAlgorithm(data);
         Path dij = dijkstraD.doRun().getPath();
 
-        BellmanFordAlgorithm bellmanFord= new BellmanFordAlgorithm(data);
-        Path bellF = bellmanFord.doRun().getPath();
+        // on sait que dijkstra fonctionne et c'est beaucoup plus rapide
+        DijkstraAlgorithm dijkstraAlgorithm= new DijkstraAlgorithm(data);
+        Path bellF = dijkstraAlgorithm.doRun().getPath();
 
         assertEquals(bellF.getLength(), dij.getLength(), 1);
     }
