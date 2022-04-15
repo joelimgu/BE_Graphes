@@ -1,10 +1,6 @@
 package org.insa.graphs.algorithm.utils;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -30,14 +26,14 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import static org.junit.Assert.*;
+
 @RunWith(Parameterized.class)
 
-public abstract class ShortestPathAlgorithmTest {
+public class ShortestPathAlgorithmTest {
 
     protected Graph graph = null;
     protected AbstractInputData data;
-
-
 
     @Before
     // charger carte
@@ -48,39 +44,39 @@ public abstract class ShortestPathAlgorithmTest {
         final GraphReader reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
-
-
         try {
             this.graph = reader.read();
         } catch (IOException err) {
             System.out.println("Unable to read the map file: " + err);
             System.exit(-1);
         }
-
-
     }
 
     // lancer
 
 
     @Test
-    public void TestFastestPath(){
+    public void TestFastestPath(Path shortest, Path fastest){
+//        Node origin = graph.getNodes().get(367769);
+//        Node destination = graph.getNodes().get(91810);
+//        this.data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
 
-        Node origin = graph.getNodes().get(367769);
-
-        Node destination = graph.getNodes().get(91810);
-        this.data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-
-        Path ShortestPath =
-        Path FastestPath = FastestAlgo().getPath();
-        assertTrue(Double.compare(ShortestPath.getMinimumTravelTime(),FastestPath.getMinimumTravelTime())>=0);
-
-
+        assertTrue(Double.compare(shortest.getMinimumTravelTime(),fastest.getMinimumTravelTime())>=0);
     }
 
     @Test
     public void TestCheminNull(){
-        assertEquals();
+
+    }
+
+    @Test
+    public void TestCheminNonConnexe(Path p){
+        assertNull(p);
+    }
+
+    @Test
+    public void TestSolutionCorrecte(Path path_Dijkstra, Path path_bellman_ford){
+        assertEquals(path_Dijkstra.getLength(), path_bellman_ford.getLength(), 1);
     }
 
 
