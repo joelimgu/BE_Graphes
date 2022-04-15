@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 
-public class ShortestPathAlgorithmTest {
+public abstract class ShortestPathAlgorithmTest {
 
     protected Graph graph = null;
     protected AbstractInputData data;
@@ -75,9 +75,18 @@ public class ShortestPathAlgorithmTest {
     }
 
     @Test
-    public void TestSolutionCorrecte(Path path_Dijkstra, Path path_bellman_ford){
+    public void TestSolutionCorrecte(Path path_Dijkstra, Path path_bellman_ford) {
         assertEquals(path_Dijkstra.getLength(), path_bellman_ford.getLength(), 1);
     }
 
+    @Test
+    public void TestCheminNull(Path path){
+        assertEquals(Double.compare(path.getLength(),0),0);
+    }
+
+    @Test
+    public void DistanceCoherente(Path path,double distance){
+        assertTrue(Double.compare(path.getLength(),distance)>=0);
+    }
 
 }
