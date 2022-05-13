@@ -40,6 +40,8 @@ public class DijkstraAlgorithmTest {
             System.exit(-1);
         }
     }
+
+    // TODO : implémenter tests pour points random
     @Test
     public void TestFastestPath() {
         Node origin = graph.getNodes().get(367769);

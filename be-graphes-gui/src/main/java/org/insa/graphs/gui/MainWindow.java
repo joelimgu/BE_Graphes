@@ -258,7 +258,7 @@ public class MainWindow extends JFrame {
                 "Origin Car", "Origin Pedestrian", "Destination Car", "Destination Pedestrian" },
                 true);
 
-        psPanel = new AlgorithmPanel(this, PackageSwitchAlgorithm.class, "Car-Pooling",
+        psPanel = new AlgorithmPanel(this, PackageSwitchAlgorithm.class, "Package switch",
                 new String[] { "Oribin A", "Origin B", "Destination A", "Destination B" }, true);
 
         // add algorithm panels
