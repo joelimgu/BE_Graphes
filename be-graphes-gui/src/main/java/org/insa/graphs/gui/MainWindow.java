@@ -259,7 +259,7 @@ public class MainWindow extends JFrame {
                 true);
 
         psPanel = new AlgorithmPanel(this, PackageSwitchAlgorithm.class, "Package switch",
-                new String[] { "Oribin A", "Origin B", "Destination A", "Destination B" }, true);
+                new String[] { "Origin A", "Origin B", "Destination A", "Destination B" }, true);
 
         // add algorithm panels
         algoPanels.add(wccPanel);

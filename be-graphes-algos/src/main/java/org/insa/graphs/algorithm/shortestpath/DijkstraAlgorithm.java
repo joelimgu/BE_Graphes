@@ -42,7 +42,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         // itérations : cf poly p.46, diapo 3.2 plus courts chemins algo de dijkstra
         while (!tas.isEmpty()){
-            if (iterationDijkstra(data, tas)) break;
+            if (iterationDijkstra(data, tas)) break; // on sort du while quand on trouve la destination
         }
 
         ShortestPathSolution solution;
@@ -69,7 +69,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         return solution;
     }
 
-    private boolean iterationDijkstra(ShortestPathData data, BinaryHeap<Label> tas) {
+    public boolean iterationDijkstra(ShortestPathData data, BinaryHeap<Label> tas) {
         Label x = tas.findMin();
         x.setMark(true);
         tas.remove(x);
