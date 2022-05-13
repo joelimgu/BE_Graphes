@@ -3,6 +3,7 @@ package org.insa.graphs.algorithm.utils;
 import org.insa.graphs.algorithm.ArcInspectorFactory;
 import org.insa.graphs.algorithm.shortestpath.BellmanFordAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.AStarAlgorithm;
+import org.insa.graphs.algorithm.shortestpath.DijkstraAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.ShortestPathData;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Node;
@@ -27,7 +28,7 @@ public class AStarAlgorithmTest {
     // charger carte
     public void ChargerCarte() throws Exception{
         // load la map
-        String mapName = "C:\\Users\\dunae\\Documents\\INSA\\3A\\BE_Graphes\\Bretagne.mapgrs";
+        String mapName = "/home/joel/Documents/Code/INSA/BE_Graphes/bretagne.mapgr";
         // code de Launch
         final GraphReader reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
@@ -64,7 +65,7 @@ public class AStarAlgorithmTest {
         ShortestPathData dataS = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
         AStarAlgorithm dijkstraS = new AStarAlgorithm(dataS);
         Path shortest = dijkstraS.doRun().getPath();
-        assertEquals(shortest.getLength(), 0.0, 0.1);
+        assertNull(shortest);
     }
 
     @Test
@@ -99,8 +100,9 @@ public class AStarAlgorithmTest {
         AStarAlgorithm dijkstraD = new AStarAlgorithm(data);
         Path dij = dijkstraD.doRun().getPath();
 
-        BellmanFordAlgorithm bellmanFord= new BellmanFordAlgorithm(data);
-        Path bellF = bellmanFord.doRun().getPath();
+        // on sait que dijkstra fonctionne et c'est beaucoup plus rapide
+        DijkstraAlgorithm dijkstraAlgorithm= new DijkstraAlgorithm(data);
+        Path bellF = dijkstraAlgorithm.doRun().getPath();
 
         assertEquals(bellF.getLength(), dij.getLength(), 1);
     }

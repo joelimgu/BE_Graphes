@@ -42,28 +42,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         // itérations : cf poly p.46, diapo 3.2 plus courts chemins algo de dijkstra
         while (!tas.isEmpty()){
-            Label x = tas.findMin();
-            x.setMark(true);
-            tas.remove(x);
-            if (x.getNode()==data.getDestination()){
-                notifyDestinationReached(data.getDestination());
-                break;
-            }
-            for (Arc arcY : x.getNode().getSuccessors()) {
-                if (!data.isAllowed(arcY)){
-                    continue;
-                }
-                Label y = labels.get(arcY.getDestination().getId());
-                if (!y.isMarked()) {
-                    double oldCost = y.getCost();
-                    y.setCost(min(y.getCost(), x.getCost() + arcY.getLength()));
-                    if (oldCost != y.getCost()) {
-                        notifyNodeReached(y.getNode());
-                        tas.insert(y);
-                        y.setFather(arcY);
-                    }
-                }
-            }
+            if (iterationDijkstra(data, tas)) break;
         }
 
         ShortestPathSolution solution;
@@ -88,6 +67,32 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         }
 
         return solution;
+    }
+
+    private boolean iterationDijkstra(ShortestPathData data, BinaryHeap<Label> tas) {
+        Label x = tas.findMin();
+        x.setMark(true);
+        tas.remove(x);
+        if (x.getNode()== data.getDestination()){
+            notifyDestinationReached(data.getDestination());
+            return true;
+        }
+        for (Arc arcY : x.getNode().getSuccessors()) {
+            if (!data.isAllowed(arcY)){
+                continue;
+            }
+            Label y = labels.get(arcY.getDestination().getId());
+            if (!y.isMarked()) {
+                double oldCost = y.getCost();
+                y.setCost(min(y.getCost(), x.getCost() + arcY.getLength()));
+                if (oldCost != y.getCost()) {
+                    notifyNodeReached(y.getNode());
+                    tas.insert(y);
+                    y.setFather(arcY);
+                }
+            }
+        }
+        return false;
     }
 
 }
