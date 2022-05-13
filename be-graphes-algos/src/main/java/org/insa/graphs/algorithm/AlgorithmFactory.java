@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.insa.graphs.algorithm.packageswitch.MyPackageSwitchAlgorithm;
+import org.insa.graphs.algorithm.packageswitch.PackageSwitchAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.AStarAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.BellmanFordAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.DijkstraAlgorithm;
@@ -36,6 +38,7 @@ public class AlgorithmFactory {
         // Register your algorithms here:
         // registerAlgorithm(CarPoolingAlgorithm.class, "My Awesome Algorithm",
         // MyCarPoolingAlgorithm.class);
+        registerAlgorithm(PackageSwitchAlgorithm.class, "Package switch", MyPackageSwitchAlgorithm.class);
     }
 
     /**
