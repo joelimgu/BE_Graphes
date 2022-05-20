@@ -148,16 +148,17 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     	
     	System.out.println("index : " + index); 
     	
-    	if (index == -1 || this.currentSize -1 < index || index == null) {
-    		System.out.println("aaaaaaaaaaaaaaaaaaaa< : "); 
-    		throw new ElementNotFoundException(x);
-    	}
-    	
-    	
     	if (index == null) {
+    		throw new ElementNotFoundException(x);
+    		
+    	}
+    	
+    	if ( index == -1 || this.currentSize -1 < index) {
     		System.out.println("aaaaaaaaaaaaaaaaaaaa< : "); 
     		throw new ElementNotFoundException(x);
     	}
+    	
+
     	
     	E lastItem = this.array.get(--this.currentSize); // -- pre decrement
     	this.arraySet(index,lastItem);

@@ -65,17 +65,9 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
         assertTrue(Double.compare(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime()) >= 0);
     }
 
-<<<<<<< HEAD
 
-     
-    
-    
-    
-    public void TestCheminNull(){
-=======
     @Test
     public void TestCheminNull() throws Exception {
->>>>>>> f7c5dc3698dc03999cbada3398a0dbfba37db787
         Node origin = graphBretagne.getNodes().get(6969);
         Node destination = graphBretagne.getNodes().get(6969);
         // shortest
