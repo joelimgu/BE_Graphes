@@ -1,5 +1,6 @@
 package org.insa.graphs.algorithm.utils;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,9 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     private int currentSize;
 
     // The heap array.
-    protected final ArrayList<E> array;
+    protected final ArrayList<E> array; // hmap = dictionnaire en python 
+    
+    protected HashMap<E,Integer> indexMap = new HashMap<E,Integer>(); 
 
     /**
      * Construct a new empty binary heap.
@@ -49,6 +52,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         }
         else {
             this.array.set(index, value);
+            this.indexMap.put(value, index); 
         }
     }
 
@@ -139,7 +143,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     public void remove(E x) throws ElementNotFoundException {
         // find x
     	// TODO : find a more efficient way than indexOf
-    	int index = this.array.indexOf(x);
+    	int index = this.indexMap.get(x);
 
 
     	if (index == -1 || this.currentSize -1 < index) {
