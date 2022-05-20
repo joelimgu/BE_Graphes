@@ -60,6 +60,8 @@ public class DijkstraAlgorithmTest {
         assertTrue(Double.compare(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime()) >= 0);
     }
 
+   
+     
     @Test
     public void TestCheminNull(){
         Node origin = graph.getNodes().get(6969);
@@ -83,6 +85,7 @@ public class DijkstraAlgorithmTest {
     }
 
     @Test
+    // la distance trouvée par le dijkstra est supérieure ou égale à la distance à vol d'oiseau 
     public void DistanceCoherente(){
         Node origin = graph.getNodes().get(367769);
         Node destination = graph.getNodes().get(91810);
@@ -95,6 +98,7 @@ public class DijkstraAlgorithmTest {
     }
 
     @Test
+    // compare avec bellman ford 
     public void TestSolutionCorrecte() {
         Node origin = graph.getNodes().get(367769);
         Node destination = graph.getNodes().get(91810);
