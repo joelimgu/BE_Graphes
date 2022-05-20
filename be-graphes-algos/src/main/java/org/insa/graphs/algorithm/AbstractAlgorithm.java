@@ -19,7 +19,7 @@ public abstract class AbstractAlgorithm<Observer> {
 
     /**
      * Create a new algorithm with an empty list of observers.
-     * 
+     *
      * @param data Input data for the algorithm.
      */
     protected AbstractAlgorithm(AbstractInputData data) {
@@ -29,7 +29,7 @@ public abstract class AbstractAlgorithm<Observer> {
 
     /**
      * Create a new algorithm with the given list of observers.
-     * 
+     *
      * @param data Input data for the algorithm.
      * @param observers Initial list of observers for the algorithm.
      */
@@ -40,7 +40,7 @@ public abstract class AbstractAlgorithm<Observer> {
 
     /**
      * Add an observer to this algorithm.
-     * 
+     *
      * @param observer Observer to add to this algorithm.
      */
     public void addObserver(Observer observer) {
@@ -63,10 +63,10 @@ public abstract class AbstractAlgorithm<Observer> {
 
     /**
      * Run the algorithm and return the solution.
-     * 
+     *
      * This methods internally time the call to doRun() and update the result of the
      * call with the computed solving time.
-     * 
+     *
      * @return The solution found by the algorithm (may not be a feasible solution).
      */
     public AbstractSolution run() {
@@ -78,10 +78,10 @@ public abstract class AbstractAlgorithm<Observer> {
 
     /**
      * Abstract method that should be implemented by child class.
-     * 
+     *
      * @return The solution found, must not be null (use an infeasible or unknown
      * status if necessary).
      */
-    protected abstract AbstractSolution doRun();
+    public abstract AbstractSolution doRun();
 
 }

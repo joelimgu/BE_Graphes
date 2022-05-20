@@ -2,10 +2,7 @@ package org.insa.graphs.algorithm.utils;
 
 import org.insa.graphs.algorithm.AlgorithmFactory;
 import org.insa.graphs.algorithm.ArcInspectorFactory;
-import org.insa.graphs.algorithm.shortestpath.AStarAlgorithm;
-import org.insa.graphs.algorithm.shortestpath.DijkstraAlgorithm;
-import org.insa.graphs.algorithm.shortestpath.ShortestPathAlgorithm;
-import org.insa.graphs.algorithm.shortestpath.ShortestPathData;
+import org.insa.graphs.algorithm.shortestpath.*;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Node;
 import org.insa.graphs.model.Path;
@@ -68,56 +65,64 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
         assertTrue(Double.compare(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime()) >= 0);
     }
 
+<<<<<<< HEAD
 
      
     
     
     
     public void TestCheminNull(){
+=======
+    @Test
+    public void TestCheminNull() throws Exception {
+>>>>>>> f7c5dc3698dc03999cbada3398a0dbfba37db787
         Node origin = graphBretagne.getNodes().get(6969);
         Node destination = graphBretagne.getNodes().get(6969);
         // shortest
         ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        AStarAlgorithm dijkstraS = new AStarAlgorithm(dataS);
-        Path shortest = dijkstraS.doRun().getPath();
+        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
+        Path shortest = algo.doRun().getPath();
         assertNull(shortest);
     }
 
-    public void TestCheminNonConnexe(){
+    @Test
+    public void TestCheminNonConnexe() throws Exception {
         Node origin = graphBretagne.getNodes().get(250038);
         Node destination = graphBretagne.getNodes().get(628387);
         // shortest
         ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        AStarAlgorithm dijkstraS = new AStarAlgorithm(dataS);
-        Path shortest = dijkstraS.doRun().getPath();
+        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);;
+        Path shortest = algo.doRun().getPath();
         assertNull(shortest);
     }
-
-    public void DistanceCoherente(){
+    @Test
+    public void DistanceCoherente() throws Exception {
         Node origin = graphBretagne.getNodes().get(367769);
         Node destination = graphBretagne.getNodes().get(91810);
         // shortest
         ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        AStarAlgorithm dijkstraS = new AStarAlgorithm(dataS);
-        Path shortest = dijkstraS.doRun().getPath();
+        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
+        Path shortest = algo.doRun().getPath();
 
         assertTrue(Double.compare(shortest.getLength(),origin.getPoint().distanceTo(destination.getPoint())) >= 0);
     }
 
-    public void TestSolutionCorrecte() {
-        Node origin = graphBretagne.getNodes().get(367769);
-        Node destination = graphBretagne.getNodes().get(91810);
-        // shortest
-        ShortestPathData data = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        AStarAlgorithm AStar = new AStarAlgorithm(data);
-        Path astarPath = AStar.doRun().getPath();
 
-        // on sait que dijkstra fonctionne et c'est beaucoup plus rapide
-        DijkstraAlgorithm dijkstraAlgorithm= new DijkstraAlgorithm(data);
-        Path dij = dijkstraAlgorithm.doRun().getPath();
-
-        assertEquals(dij.getLength(), astarPath.getLength(), 1);
-    }
+//    @Test
+//    public void TestSolutionCorrecte() {
+//        Node origin = graphBretagne.getNodes().get(367769);
+//        Node destination = graphBretagne.getNodes().get(91810);
+//        // shortest
+//        ShortestPathData data = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+//        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,data);
+//        Path algoPath = algo.doRun().getPath();
+//
+//        // on sait que dijkstra fonctionne et c'est beaucoup plus rapide
+//        BellmanFordAlgorithm bellmanFordAlgorithm= new DijkstraAlgorithm(data);
+//        Path dij = bellmanFordAlgorithm.doRun().getPath();
+//
+//        assertEquals(dij.getLength(), algoPath.getLength(), 1);
+//    }
 
     public void TestRandomPath() {
         Random rand = new Random();
