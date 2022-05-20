@@ -215,6 +215,7 @@ public abstract class PriorityQueueTest {
 
     @Test(expected = ElementNotFoundException.class)
     public void testRemoveEmpty() {
+    	System.out.println("test empty"); 
         Assume.assumeTrue(queue.isEmpty());
         queue.remove(new MutableInteger(0));
     }

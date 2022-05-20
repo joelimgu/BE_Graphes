@@ -52,8 +52,8 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         }
         else {
             this.array.set(index, value);
-            this.indexMap.put(value, index); 
         }
+        this.indexMap.put(value, index); 
     }
 
     /**
@@ -143,18 +143,27 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     public void remove(E x) throws ElementNotFoundException {
         // find x
     	// TODO : find a more efficient way than indexOf
-    	int index = this.indexMap.get(x);
-
-
-    	if (index == -1 || this.currentSize -1 < index) {
+    	Integer index = this.indexMap.get(x);
+    	// int index = array.indexOf(x); 
+    	
+    	System.out.println("index : " + index); 
+    	
+    	if (index == -1 || this.currentSize -1 < index || index == null) {
+    		System.out.println("aaaaaaaaaaaaaaaaaaaa< : "); 
     		throw new ElementNotFoundException(x);
     	}
-
+    	
+    	
+    	if (index == null) {
+    		System.out.println("aaaaaaaaaaaaaaaaaaaa< : "); 
+    		throw new ElementNotFoundException(x);
+    	}
+    	
     	E lastItem = this.array.get(--this.currentSize); // -- pre decrement
     	this.arraySet(index,lastItem);
     	this.percolateUp(index);
     	this.percolateDown(index);
-
+    	this.indexMap.remove(x);
 
     }
 

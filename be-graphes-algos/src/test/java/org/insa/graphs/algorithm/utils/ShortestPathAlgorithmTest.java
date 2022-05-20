@@ -68,6 +68,11 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
         assertTrue(Double.compare(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime()) >= 0);
     }
 
+
+     
+    
+    
+    
     public void TestCheminNull(){
         Node origin = graphBretagne.getNodes().get(6969);
         Node destination = graphBretagne.getNodes().get(6969);
