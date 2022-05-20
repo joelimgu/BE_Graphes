@@ -17,6 +17,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Random; 
 
 import static org.junit.Assert.*;
 
@@ -107,5 +108,25 @@ public class DijkstraAlgorithmTest {
 
         assertEquals(bellF.getLength(), dij.getLength(), 1);
     }
+    
+    @Test
+    public void TestRandomPath() {
+    	Random rand = new Random(); 
+    	int nb_tests = 10; 
+    	for (int i = 0; i < nb_tests; i++) {
+    		Node origin = graph.getNodes().get(rand.nextInt(graph.size())); 
+        	Node destination = graph.getNodes().get(rand.nextInt(graph.size())); 
+        	// shortest
+            ShortestPathData data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+            DijkstraAlgorithm dijkstraD = new DijkstraAlgorithm(data);
+            Path dij = dijkstraD.doRun().getPath();
+
+            BellmanFordAlgorithm bellmanFord= new BellmanFordAlgorithm(data);
+            Path bellF = bellmanFord.doRun().getPath();
+
+            assertEquals(bellF.getLength(), dij.getLength(), 1);
+    	}
+    }
+    
 
 }
