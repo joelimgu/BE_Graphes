@@ -22,7 +22,7 @@ public class MyPackageSwitchAlgorithm extends PackageSwitchAlgorithm{
         Graph graph = data.getGraph();
 
         // chemin 1
-
+        System.out.println("doRun package");
         Path chemin1 = this.lancerDijkstra(graph,data.getO1(),data.getD1());
         notifyOrigin1Processed(chemin1.getOrigin());
         notifyDestination1Reached(chemin1.getDestination());

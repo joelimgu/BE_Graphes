@@ -15,7 +15,7 @@ public abstract class ShortestPathAlgorithm extends AbstractAlgorithm<ShortestPa
     }
 
     @Override
-    protected abstract ShortestPathSolution doRun();
+    public abstract ShortestPathSolution doRun();
 
     @Override
     public ShortestPathData getInputData() {
@@ -24,7 +24,7 @@ public abstract class ShortestPathAlgorithm extends AbstractAlgorithm<ShortestPa
 
     /**
      * Notify all observers that the origin has been processed.
-     * 
+     *
      * @param node Origin.
      */
     public void notifyOriginProcessed(Node node) {
@@ -35,7 +35,7 @@ public abstract class ShortestPathAlgorithm extends AbstractAlgorithm<ShortestPa
 
     /**
      * Notify all observers that a node has been reached for the first time.
-     * 
+     *
      * @param node Node that has been reached.
      */
     public void notifyNodeReached(Node node) {
@@ -47,7 +47,7 @@ public abstract class ShortestPathAlgorithm extends AbstractAlgorithm<ShortestPa
     /**
      * Notify all observers that a node has been marked, i.e. its final value has
      * been set.
-     * 
+     *
      * @param node Node that has been marked.
      */
     public void notifyNodeMarked(Node node) {
@@ -58,7 +58,7 @@ public abstract class ShortestPathAlgorithm extends AbstractAlgorithm<ShortestPa
 
     /**
      * Notify all observers that the destination has been reached.
-     * 
+     *
      * @param node Destination.
      */
     public void notifyDestinationReached(Node node) {
