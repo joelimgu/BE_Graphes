@@ -17,6 +17,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -97,14 +98,33 @@ public class AStarAlgorithmTest {
         Node destination = graph.getNodes().get(91810);
         // shortest
         ShortestPathData data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        AStarAlgorithm dijkstraD = new AStarAlgorithm(data);
-        Path dij = dijkstraD.doRun().getPath();
+        AStarAlgorithm AStar = new AStarAlgorithm(data);
+        Path astarPath = AStar.doRun().getPath();
 
         // on sait que dijkstra fonctionne et c'est beaucoup plus rapide
         DijkstraAlgorithm dijkstraAlgorithm= new DijkstraAlgorithm(data);
-        Path bellF = dijkstraAlgorithm.doRun().getPath();
+        Path dij = dijkstraAlgorithm.doRun().getPath();
 
-        assertEquals(bellF.getLength(), dij.getLength(), 1);
+        assertEquals(dij.getLength(), astarPath.getLength(), 1);
+    }
+    
+    @Test
+    public void TestRandomPath() {
+    	Random rand = new Random(); 
+    	int nb_tests = 10; 
+    	for (int i = 0; i < nb_tests; i++) {
+    		Node origin = graph.getNodes().get(rand.nextInt(graph.size())); 
+        	Node destination = graph.getNodes().get(rand.nextInt(graph.size())); 
+        	// shortest
+            ShortestPathData data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+            DijkstraAlgorithm dijkstraD = new DijkstraAlgorithm(data);
+            Path dij = dijkstraD.doRun().getPath();
+
+            AStarAlgorithm AStar= new AStarAlgorithm(data);
+            Path astarPath = AStar.doRun().getPath();
+
+            assertEquals(astarPath.getLength(), dij.getLength(), 1);
+    	}
     }
 
 }
