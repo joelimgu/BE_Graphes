@@ -34,7 +34,7 @@ public class WeaklyConnectedComponentsAlgorithm
 
     /**
      * Notify all observers that the algorithm is entering a new component.
-     * 
+     *
      * @param curNode Starting node for the component.
      */
     protected void notifyStartComponent(Node curNode) {
@@ -46,7 +46,7 @@ public class WeaklyConnectedComponentsAlgorithm
     /**
      * Notify all observers that a new node has been found for the current
      * component.
-     * 
+     *
      * @param node New node found for the current component.
      */
     protected void notifyNewNodeInComponent(Node node) {
@@ -57,7 +57,7 @@ public class WeaklyConnectedComponentsAlgorithm
 
     /**
      * Notify all observers that the algorithm has computed a new component.
-     * 
+     *
      * @param nodes List of nodes in the component.
      */
     protected void notifyEndComponent(ArrayList<Node> nodes) {
@@ -92,10 +92,10 @@ public class WeaklyConnectedComponentsAlgorithm
     /**
      * Apply a breadth first search algorithm on the given undirected graph
      * (adjacency list), starting at node cur, and marking nodes in marked.
-     * 
+     *
      * @param marked
      * @param cur
-     * 
+     *
      * @return
      */
     protected ArrayList<Node> bfs(ArrayList<HashSet<Integer>> ugraph, boolean[] marked, int cur) {
@@ -133,7 +133,7 @@ public class WeaklyConnectedComponentsAlgorithm
     }
 
     @Override
-    protected WeaklyConnectedComponentsSolution doRun() {
+    public WeaklyConnectedComponentsSolution doRun() {
 
         Graph graph = getInputData().getGraph();
         ArrayList<HashSet<Integer>> ugraph = createUndirectedGraph();

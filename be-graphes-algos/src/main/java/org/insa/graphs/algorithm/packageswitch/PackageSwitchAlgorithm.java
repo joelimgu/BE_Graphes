@@ -14,7 +14,7 @@ public abstract class PackageSwitchAlgorithm extends AbstractAlgorithm<PackageSw
 
     /**
      * Create a new PackageSwitchAlgorithm with the given data.
-     * 
+     *
      * @param data
      */
     protected PackageSwitchAlgorithm(PackageSwitchData data) {
@@ -25,10 +25,10 @@ public abstract class PackageSwitchAlgorithm extends AbstractAlgorithm<PackageSw
     public PackageSwitchSolution run() {
         return (PackageSwitchSolution) super.run();
     }
-    
+
 
     @Override
-    protected abstract PackageSwitchSolution doRun();
+    public abstract PackageSwitchSolution doRun();
 
     protected Path lancerDijkstra(Graph graph, Node o, Node d) {
         // shortest
