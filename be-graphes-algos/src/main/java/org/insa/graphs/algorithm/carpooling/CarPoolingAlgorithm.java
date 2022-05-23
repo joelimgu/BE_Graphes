@@ -14,7 +14,7 @@ public abstract class CarPoolingAlgorithm extends AbstractAlgorithm<CarPoolingOb
     }
 
     @Override
-    protected abstract CarPoolingSolution doRun();
+    public abstract CarPoolingSolution doRun();
 
     @Override
     public CarPoolingData getInputData() {

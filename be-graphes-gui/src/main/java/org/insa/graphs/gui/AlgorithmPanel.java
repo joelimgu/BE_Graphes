@@ -34,14 +34,14 @@ import org.insa.graphs.model.Node;
 public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
 
     public class StartActionEvent extends ActionEvent {
 
         /**
-         * 
+         *
          */
         private static final long serialVersionUID = 4090710269781229078L;
 
@@ -124,7 +124,7 @@ public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
 
     /**
      * Create a new AlgorithmPanel with the given parameters.
-     * 
+     *
      * @param parent Parent component for this panel. Only use for centering
      *        dialogs.
      * @param baseAlgorithm Base algorithm for this algorithm panel.
@@ -132,7 +132,7 @@ public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
      * @param nodeNames Names of the input nodes.
      * @param enableArcFilterSelection <code>true</code> to enable
      *        {@link ArcInspector} selection.
-     * 
+     *
      * @see ArcInspectorFactory
      */
     public AlgorithmPanel(Component parent, Class<? extends AbstractAlgorithm<?>> baseAlgorithm,
@@ -225,6 +225,7 @@ public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
                             (ArcInspector) arcFilterSelect.getSelectedItem(),
                             graphicObserverCheckbox.isSelected(),
                             textualObserverCheckbox.isSelected()));
+                    System.out.println("Algo selected factory: base: " + baseAlgorithm + " algo: " + algoSelect);
                 }
             }
         });
@@ -278,9 +279,9 @@ public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
 
     /**
      * Create the title JLabel for this panel.
-     * 
+     *
      * @param title Title for the label.
-     * 
+     *
      * @return A new JLabel containing the given title with proper font.
      */
     protected JLabel createTitleLabel(String title) {
@@ -296,12 +297,12 @@ public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
 
     /**
      * Create the combo box for the algorithm selection.
-     * 
+     *
      * @param baseAlgorithm Base algorithm for which the select box should be
      *        created.
-     * 
+     *
      * @return A new JComboBox containing algorithms for the given base algorithm.
-     * 
+     *
      * @see AlgorithmFactory
      */
     protected JComboBox<String> createAlgoritmSelectComboBox(
@@ -316,9 +317,9 @@ public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
 
     /**
      * Create a node input panel with the given node input names.
-     * 
+     *
      * @param nodeNames Field names for the inputs to create.
-     * 
+     *
      * @return A new NodesInputPanel containing inputs for the given names.
      */
     protected NodesInputPanel createNodesInputPanel(String[] nodeNames) {
@@ -334,9 +335,9 @@ public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
     /**
      * Check if the given list of nodes does not contain any <code>null</code>
      * value.
-     * 
+     *
      * @param nodes List of {@link Node} to check.
-     * 
+     *
      * @return <code>true</code> if the list does not contain any <code>null</code>
      *         value, <code>false</code> otherwise.
      */
@@ -363,7 +364,7 @@ public class AlgorithmPanel extends JPanel implements DrawingChangeListener {
 
     /**
      * Add a new start action listener to this class.
-     * 
+     *
      * @param listener Listener to add.
      */
     public void addStartActionListener(ActionListener listener) {
