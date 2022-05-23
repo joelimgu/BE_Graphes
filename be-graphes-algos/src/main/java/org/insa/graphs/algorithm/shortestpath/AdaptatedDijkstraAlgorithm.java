@@ -8,7 +8,7 @@ public class AdaptatedDijkstraAlgorithm extends DijkstraAlgorithm{
     }
 
 
-    // TODO : passer les variables locales à un état interne de l'algo 
+    // TODO : passer les variables locales à un état interne de l'algo
     public boolean iterationDijkstra(){
         return true;
     }
