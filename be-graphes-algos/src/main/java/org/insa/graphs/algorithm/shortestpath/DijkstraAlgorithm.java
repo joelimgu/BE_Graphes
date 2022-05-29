@@ -20,7 +20,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         super(data);
     }
 
-    public void generateLabels(Graph graph) {
+    protected void generateLabels(Graph graph) {
         int size = graph.size();
         this.labels = new ArrayList<>();
         for (int i = 0; i < size; i++) {
@@ -66,31 +66,27 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             }
         }
 
-            ShortestPathSolution solution;
+        ShortestPathSolution solution;
 
-            if (labels.get(data.getDestination().getId()).getFather() == null) {
-                solution = new ShortestPathSolution(data, Status.INFEASIBLE);
-            } else {
-                // cf bellman pour reconstruire la solution
-                ArrayList<Arc> arcs = new ArrayList<>();
-                Arc arc = labels.get(data.getDestination().getId()).getFather();
-                while (arc != null) {
-                    arcs.add(arc);
-                    arc = labels.get(arc.getOrigin().getId()).getFather();
-                }
-
-                // Reverse the path...
-                Collections.reverse(arcs);
-
-                // Create the final solution.
-                solution = new ShortestPathSolution(data, AbstractSolution.Status.OPTIMAL, new Path(graph, arcs));
-
+        if (labels.get(data.getDestination().getId()).getFather() == null) {
+            solution = new ShortestPathSolution(data, Status.INFEASIBLE);
+        } else {
+            // cf bellman pour reconstruire la solution
+            ArrayList<Arc> arcs = new ArrayList<>();
+            Arc arc = labels.get(data.getDestination().getId()).getFather();
+            while (arc != null) {
+                arcs.add(arc);
+                arc = labels.get(arc.getOrigin().getId()).getFather();
             }
-        return solution;
+
+            // Reverse the path...
+            Collections.reverse(arcs);
+
+            // Create the final solution.
+            solution = new ShortestPathSolution(data, AbstractSolution.Status.OPTIMAL, new Path(graph, arcs));
 
         }
-
-
+        return solution;
     }
 
-
+}

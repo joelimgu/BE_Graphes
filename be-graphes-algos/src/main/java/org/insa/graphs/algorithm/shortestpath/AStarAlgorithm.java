@@ -12,7 +12,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
     }
 
 
-    public void generateLabels(Graph graph){
+    protected void generateLabels(Graph graph){
         int size = graph.size();
         ShortestPathData data = getInputData();
         Node dest = data.getDestination();
