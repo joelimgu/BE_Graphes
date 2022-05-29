@@ -72,7 +72,7 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
             if ( shortest == null || fastest == null) {
                 assertEquals(shortest, fastest);
             } else {
-                assertEquals(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime(), 0.01);
+                assertTrue(Double.compare(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime()) >= 0);
             }
         }
     }

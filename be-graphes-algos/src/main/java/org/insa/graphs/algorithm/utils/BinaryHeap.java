@@ -18,7 +18,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     private int currentSize;
 
     // The heap array.
-    protected final ArrayList<E> array; // hmap = dictionnaire en python
+    protected final ArrayList<E> array;
 
     protected HashMap<E,Integer> indexMap = new HashMap<E,Integer>();
 
