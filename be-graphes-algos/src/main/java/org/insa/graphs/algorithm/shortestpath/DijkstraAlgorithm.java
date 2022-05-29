@@ -49,7 +49,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         if (labels.get(data.getDestination().getId()).getFather()==null){
             solution = new ShortestPathSolution(data, Status.INFEASIBLE);
-        }else{
+        } else {
             // cf bellman pour reconstruire la solution
             ArrayList<Arc> arcs = new ArrayList<>();
             Arc arc = labels.get(data.getDestination().getId()).getFather();
