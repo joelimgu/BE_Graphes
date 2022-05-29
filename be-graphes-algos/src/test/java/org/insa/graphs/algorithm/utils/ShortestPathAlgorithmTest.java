@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 
 public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
 
-    private final int nbOfTests = 50;
+    private final int nbOfTests = 5;
     protected Graph graph = null;
     protected Class<? extends ShortestPathAlgorithm> AlgorithmClass;
     protected Graph graphBretagne = null;
@@ -143,8 +143,11 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
 
             BellmanFordAlgorithm BF= new BellmanFordAlgorithm(data);
             Path bell = BF.doRun().getPath();
-
-            assertEquals(bell.getLength(), dij.getLength(), 1);
+            if ( bell == null || dij == null) {
+                assertEquals(bell, dij);
+            } else {
+                assertEquals(bell.getLength(), dij.getLength(), 1);
+            }
         }
 
     }

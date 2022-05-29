@@ -27,6 +27,4 @@ public class AStarAlgorithmTest extends ShortestPathAlgorithmTest<DijkstraAlgori
     public void AStarAlgorithmTest() {
         this.ShortestPathAlgorithmTest(DijkstraAlgorithm.class);
     }
-
-
 }
