@@ -18,9 +18,9 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     private int currentSize;
 
     // The heap array.
-    protected final ArrayList<E> array; // hmap = dictionnaire en python 
-    
-    protected HashMap<E,Integer> indexMap = new HashMap<E,Integer>(); 
+    protected final ArrayList<E> array; // hmap = dictionnaire en python
+
+    protected HashMap<E,Integer> indexMap = new HashMap<E,Integer>();
 
     /**
      * Construct a new empty binary heap.
@@ -53,7 +53,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         else {
             this.array.set(index, value);
         }
-        this.indexMap.put(value, index); 
+        this.indexMap.put(value, index);
     }
 
     /**
@@ -143,23 +143,19 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     public void remove(E x) throws ElementNotFoundException {
         // find x
     	// TODO : find a more efficient way than indexOf
-    	Integer index = this.indexMap.get(x);
-    	// int index = array.indexOf(x); 
-    	
-    	System.out.println("index : " + index); 
-    	
-    	if (index == null) {
-    		throw new ElementNotFoundException(x);
-    		
-    	}
-    	
-    	if ( index == -1 || this.currentSize -1 < index) {
-    		System.out.println("aaaaaaaaaaaaaaaaaaaa< : "); 
-    		throw new ElementNotFoundException(x);
-    	}
-    	
+//    	Integer index = this.indexMap.get(x);
+    	 int index = array.indexOf(x);
 
-    	
+//    	if (index == null) {
+//    		throw new ElementNotFoundException(x);
+//    	}
+
+    	if ( index == -1 || this.currentSize -1 < index) {
+    		throw new ElementNotFoundException(x);
+    	}
+
+
+
     	E lastItem = this.array.get(--this.currentSize); // -- pre decrement
     	this.arraySet(index,lastItem);
     	this.percolateUp(index);
