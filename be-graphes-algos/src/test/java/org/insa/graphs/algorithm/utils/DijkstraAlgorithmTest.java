@@ -25,7 +25,7 @@ public class DijkstraAlgorithmTest extends ShortestPathAlgorithmTest<DijkstraAlg
 
     @Before
     public void DijkstraAlgorithmTest() {
-        this.ShortestPathAlgorithmTest("/home/joel/Documents/Code/INSA/BE_Graphes/bretagne.mapgr", DijkstraAlgorithm.class);
+        this.ShortestPathAlgorithmTest(DijkstraAlgorithm.class);
     }
 
 

@@ -26,29 +26,20 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
     protected Class<? extends ShortestPathAlgorithm> AlgorithmClass;
     protected Graph graphBretagne = null;
 
-    private int getRandomInt(int min, int max) {
-        Random random = new Random();
-        return random.ints(min, max)
-                .findFirst()
-                .getAsInt();
-    }
+
 
     // charger carte
-    public void ShortestPathAlgorithmTest(String mapPath, Class<? extends ShortestPathAlgorithm> algorithm) {
+    public void ShortestPathAlgorithmTest(Class<? extends ShortestPathAlgorithm> algorithm) {
         // load la map
-        String mapName = mapPath;
         this.AlgorithmClass = algorithm;
         String mapBretagne = "/home/joel/Documents/Code/INSA/BE_Graphes/bretagne.mapgr";
         try {
         // code de Launch
-        final GraphReader reader = new BinaryGraphReader(
-                new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
         final GraphReader readerBretagne = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapBretagne))));
 
             // TODO passer map path comme argument
-//            this.graph = reader.read();
-            this.graphBretagne = reader.read();
+            this.graphBretagne = readerBretagne.read();
         } catch (IOException err) {
             System.out.println("Unable to read the map file: " + err);
             System.exit(-1);
@@ -133,8 +124,8 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
     public void TestSolutionCorrecteBF() throws Exception {
         Random rand = new Random();
         for (int i = 0; i < this.nbOfTests; i++) {
-            Node origin = this.graphBretagne.getNodes().get(rand.nextInt(this.graphBretagne.size()));
-            Node destination = this.graphBretagne.getNodes().get(rand.nextInt(this.graphBretagne.size()));
+            Node origin = this.graphBretagne.getNodes().get(rand.nextInt(this.graphBretagne.size()-1));
+            Node destination = this.graphBretagne.getNodes().get(rand.nextInt(this.graphBretagne.size()-1));
             ShortestPathData data = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
             T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,data);
 
