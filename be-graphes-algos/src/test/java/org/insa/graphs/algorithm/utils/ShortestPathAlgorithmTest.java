@@ -78,7 +78,6 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
             ShortestPathData dataF = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(2));
             T algo2 = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataF);
             Path fastest = algo2.doRun().getPath();
-            System.out.println("points : " + randInt1 + " " + randInt2);
             if ( shortest == null || fastest == null) {
                 assertEquals(shortest, fastest);
             } else {
