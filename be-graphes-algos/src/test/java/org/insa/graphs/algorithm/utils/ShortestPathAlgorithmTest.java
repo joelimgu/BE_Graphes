@@ -114,6 +114,7 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
         Path shortest = algo.doRun().getPath();
         assertNull(shortest);
     }
+
     @Test
     public void DistanceCoherente() throws Exception {
         for (int i = 0; i < this.nbOfTests; i++) {
@@ -139,38 +140,24 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
     }
 
 
-//    @Test
-//    public void TestSolutionCorrecte() {
-//        Node origin = graphBretagne.getNodes().get(367769);
-//        Node destination = graphBretagne.getNodes().get(91810);
-//        // shortest
-//        ShortestPathData data = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-//        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,data);
-//        Path algoPath = algo.doRun().getPath();
-//
-//        // on sait que dijkstra fonctionne et c'est beaucoup plus rapide
-//        BellmanFordAlgorithm bellmanFordAlgorithm= new DijkstraAlgorithm(data);
-//        Path dij = bellmanFordAlgorithm.doRun().getPath();
-//
-//        assertEquals(dij.getLength(), algoPath.getLength(), 1);
-//    }
-
-    public void TestRandomPath() {
+    @Test
+    public void TestSolutionCorrecteBF() throws Exception {
         Random rand = new Random();
-        int nb_tests = 10;
-        for (int i = 0; i < nb_tests; i++) {
-            Node origin = graph.getNodes().get(rand.nextInt(graph.size()));
-            Node destination = graph.getNodes().get(rand.nextInt(graph.size()));
-            // shortest
-            ShortestPathData data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-            DijkstraAlgorithm dijkstraD = new DijkstraAlgorithm(data);
-            Path dij = dijkstraD.doRun().getPath();
+        for (int i = 0; i < this.nbOfTests; i++) {
+            Node origin = this.graphBretagne.getNodes().get(rand.nextInt(this.graphBretagne.size()));
+            Node destination = this.graphBretagne.getNodes().get(rand.nextInt(this.graphBretagne.size()));
+            ShortestPathData data = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+            T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,data);
 
-            AStarAlgorithm AStar= new AStarAlgorithm(data);
-            Path astarPath = AStar.doRun().getPath();
+            Path dij = algo.doRun().getPath();
 
-            assertEquals(astarPath.getLength(), dij.getLength(), 1);
+            BellmanFordAlgorithm BF= new BellmanFordAlgorithm(data);
+            Path bell = BF.doRun().getPath();
+
+            assertEquals(bell.getLength(), dij.getLength(), 1);
         }
+
     }
+
 
 }
