@@ -48,75 +48,85 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
 
     @Test
     public void TestFastestPath() throws Exception {
-        Random rand = new Random();
-        int randInt1 = rand.nextInt(graphBretagne.getNodes().size()-1);
-        int randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+        for (int i = 0; i < this.nbOfTests; i++) {
+            Random rand = new Random();
+            int randInt1 = rand.nextInt(graphBretagne.getNodes().size()-1);
+            int randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
 
-        // on s'assure que les deux numeros sont differents pour n'avoir pas de chemin null
-        while (randInt1 == randInt2) {
-            randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+            // on s'assure que les deux numeros sont differents pour n'avoir pas de chemin null
+            while (randInt1 == randInt2) {
+                randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+            }
+
+            Node origin = this.graphBretagne.getNodes().get(randInt1);
+            Node destination = this.graphBretagne.getNodes().get(randInt2);
+            // shortest
+            ShortestPathData dataS = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+            T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
+            Path shortest = algo.doRun().getPath();
+
+            // fastest
+            ShortestPathData dataF = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(2));
+            T algo2 = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataF);
+            Path fastest = algo2.doRun().getPath();
+            if ( shortest == null || fastest == null) {
+                assertEquals(shortest, fastest);
+            } else {
+                assertEquals(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime(), 0.01);
+            }
         }
-
-        Node origin = this.graphBretagne.getNodes().get(randInt1);
-        Node destination = this.graphBretagne.getNodes().get(randInt2);
-        // shortest
-        ShortestPathData dataS = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
-        Path shortest = algo.doRun().getPath();
-
-        // fastest
-        ShortestPathData dataF = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(2));
-        T algo2 = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataF);
-        Path fastest = algo2.doRun().getPath();
-
-        assertEquals(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime(), 0.01);
     }
 
 
     @Test
     public void TestCheminNull() throws Exception {
-        Random rand = new Random();
-        int randInt1 = rand.nextInt(graphBretagne.getNodes().size()-1);
+        for (int i = 0; i < this.nbOfTests; i++) {
+            Random rand = new Random();
+            int randInt1 = rand.nextInt(this.graphBretagne.size()-1);
 
-        Node origin = graphBretagne.getNodes().get(randInt1);
-        Node destination = graphBretagne.getNodes().get(randInt1);
-        // shortest
-        ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
-        Path shortest = algo.doRun().getPath();
-        assertNull(shortest);
+            Node origin = this.graphBretagne.getNodes().get(randInt1);
+            Node destination = this.graphBretagne.getNodes().get(randInt1);
+            // shortest
+            ShortestPathData dataS = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+            T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
+            Path shortest = algo.doRun().getPath();
+            assertNull(shortest);
+        }
     }
 
     @Test
     public void TestCheminNonConnexe() throws Exception {
-        Node origin = graphBretagne.getNodes().get(250038);
-        Node destination = graphBretagne.getNodes().get(628387);
+        Node origin = this.graphBretagne.getNodes().get(250038);
+        Node destination = this.graphBretagne.getNodes().get(628387);
         // shortest
-        ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);;
+        ShortestPathData dataS = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
         Path shortest = algo.doRun().getPath();
         assertNull(shortest);
     }
 
     @Test
     public void DistanceCoherente() throws Exception {
-        Random rand = new Random();
-        int randInt1 = rand.nextInt(graphBretagne.getNodes().size()-1);
-        int randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+        for (int i = 0; i < this.nbOfTests; i++) {
+            Random rand = new Random();
+            int randInt1 = rand.nextInt(this.graphBretagne.size()-1);
+            int randInt2 = rand.nextInt(this.graphBretagne.size()-1);
 
-        // on s'assure que les deux numeros sont differents pour n'avoir pas de chemin null
-        while (randInt1 == randInt2) {
-            randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+            // on s'assure que les deux numeros sont differents pour n'avoir pas de chemin null
+            while (randInt1 == randInt2) {
+                randInt2 = rand.nextInt(this.graphBretagne.getNodes().size()-1);
+            }
+
+            Node origin = this.graphBretagne.getNodes().get(randInt1);
+            Node destination = this.graphBretagne.getNodes().get(randInt2);
+            // shortest
+            ShortestPathData dataS = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+            T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
+            Path shortest = algo.doRun().getPath();
+            if ( shortest != null ) {
+                assertTrue(Double.compare(shortest.getLength(),origin.getPoint().distanceTo(destination.getPoint())) >= 0);
+            }
         }
-
-        Node origin = graphBretagne.getNodes().get(randInt1);
-        Node destination = graphBretagne.getNodes().get(randInt2);
-        // shortest
-        ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
-        Path shortest = algo.doRun().getPath();
-
-        assertTrue(Double.compare(shortest.getLength(),origin.getPoint().distanceTo(destination.getPoint())) >= 0);
     }
 
 
