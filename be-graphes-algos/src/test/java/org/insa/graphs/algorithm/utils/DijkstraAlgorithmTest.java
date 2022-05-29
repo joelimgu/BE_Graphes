@@ -22,11 +22,8 @@ import java.util.Random;
 import static org.junit.Assert.*;
 
 public class DijkstraAlgorithmTest extends ShortestPathAlgorithmTest<DijkstraAlgorithm> {
-
     @Before
     public void DijkstraAlgorithmTest() {
         this.ShortestPathAlgorithmTest(DijkstraAlgorithm.class);
     }
-
-
 }

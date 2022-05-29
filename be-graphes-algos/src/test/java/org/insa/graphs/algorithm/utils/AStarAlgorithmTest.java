@@ -2,6 +2,7 @@ package org.insa.graphs.algorithm.utils;
 
 import org.insa.graphs.algorithm.AbstractInputData;
 import org.insa.graphs.algorithm.ArcInspectorFactory;
+import org.insa.graphs.algorithm.shortestpath.AStarAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.BellmanFordAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.DijkstraAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.ShortestPathData;
@@ -21,10 +22,10 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-public class AStarAlgorithmTest extends ShortestPathAlgorithmTest<DijkstraAlgorithm> {
+public class AStarAlgorithmTest extends ShortestPathAlgorithmTest<AStarAlgorithm> {
 
     @Before
     public void AStarAlgorithmTest() {
-        this.ShortestPathAlgorithmTest(DijkstraAlgorithm.class);
+        this.ShortestPathAlgorithmTest(AStarAlgorithm.class);
     }
 }
