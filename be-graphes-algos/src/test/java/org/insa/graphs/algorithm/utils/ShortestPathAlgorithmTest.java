@@ -21,10 +21,17 @@ import static org.junit.Assert.*;
 
 public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
 
+    private final int nbOfTests = 50;
     protected Graph graph = null;
     protected Class<? extends ShortestPathAlgorithm> AlgorithmClass;
     protected Graph graphBretagne = null;
 
+    private int getRandomInt(int min, int max) {
+        Random random = new Random();
+        return random.ints(min, max)
+                .findFirst()
+                .getAsInt();
+    }
 
     // charger carte
     public void ShortestPathAlgorithmTest(String mapPath, Class<? extends ShortestPathAlgorithm> algorithm) {
@@ -50,26 +57,38 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
 
     @Test
     public void TestFastestPath() throws Exception {
-        Node origin = graphBretagne.getNodes().get(367769);
-        Node destination = graphBretagne.getNodes().get(91810);
+        Random rand = new Random();
+        int randInt1 = rand.nextInt(graphBretagne.getNodes().size()-1);
+        int randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+
+        // on s'assure que les deux numeros sont differents pour n'avoir pas de chemin null
+        while (randInt1 == randInt2) {
+            randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+        }
+
+        Node origin = this.graphBretagne.getNodes().get(randInt1);
+        Node destination = this.graphBretagne.getNodes().get(randInt2);
         // shortest
-        ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
+        ShortestPathData dataS = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
         T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
         Path shortest = algo.doRun().getPath();
 
         // fastest
-        ShortestPathData dataF = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(2));
+        ShortestPathData dataF = new ShortestPathData(this.graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(2));
         T algo2 = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataF);
         Path fastest = algo2.doRun().getPath();
 
-        assertTrue(Double.compare(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime()) >= 0);
+        assertEquals(shortest.getMinimumTravelTime(), fastest.getMinimumTravelTime(), 0.01);
     }
 
 
     @Test
     public void TestCheminNull() throws Exception {
-        Node origin = graphBretagne.getNodes().get(6969);
-        Node destination = graphBretagne.getNodes().get(6969);
+        Random rand = new Random();
+        int randInt1 = rand.nextInt(graphBretagne.getNodes().size()-1);
+
+        Node origin = graphBretagne.getNodes().get(randInt1);
+        Node destination = graphBretagne.getNodes().get(randInt1);
         // shortest
         ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
         T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
@@ -89,8 +108,17 @@ public class ShortestPathAlgorithmTest<T extends ShortestPathAlgorithm> {
     }
     @Test
     public void DistanceCoherente() throws Exception {
-        Node origin = graphBretagne.getNodes().get(367769);
-        Node destination = graphBretagne.getNodes().get(91810);
+        Random rand = new Random();
+        int randInt1 = rand.nextInt(graphBretagne.getNodes().size()-1);
+        int randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+
+        // on s'assure que les deux numeros sont differents pour n'avoir pas de chemin null
+        while (randInt1 == randInt2) {
+            randInt2 = rand.nextInt(graphBretagne.getNodes().size()-1);
+        }
+
+        Node origin = graphBretagne.getNodes().get(randInt1);
+        Node destination = graphBretagne.getNodes().get(randInt2);
         // shortest
         ShortestPathData dataS = new ShortestPathData(graphBretagne, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
         T algo = (T) AlgorithmFactory.createAlgorithm(this.AlgorithmClass,dataS);
